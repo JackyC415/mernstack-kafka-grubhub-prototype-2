@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookies';
-import { Button } from 'reactstrap';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import '../../App.css'
 
 class Login extends Component {
     constructor(props) {
@@ -59,16 +61,25 @@ class Login extends Component {
         }
         return (
             <div>{redirectHome}
-                <div class="container">
-                    <form onSubmit={this.handleSubmit}>
-                        <h1>Login</h1>
-                        Email: <input type="email" name="email" placeholder="example@gmail.com" value={this.state.email} onChange={this.handleChange} required></input><br />
-                        Password: <input type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="16" value={this.state.password} onChange={this.handleChange} required></input><br />
-                        <div><Button>Login</Button></div>
-                        <div>New? <Link to="/register">Create account</Link></div>
-                        <div>{this.state.output}</div>
-                    </form>
-                </div>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+            <h2>Login</h2>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+            </Form.Text>
+            </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="16" value={this.state.password} onChange={this.handleChange} required />
+            </Form.Group>
+                <Button variant="primary" type="submit">
+                    Login
+            </Button>
+            <div>New? <Link to="/register">Create account</Link></div>
+            <div>{this.state.output}</div>
+            </Form>
             </div>
         )
     }

@@ -108,9 +108,6 @@ class NavbarPage extends Component {
                             </Nav>
                         </Collapse>
                     </Navbar>
-                    <h1>Grubhub Prototype</h1>
-                    <h4>Creator: Jacky Z. Chen</h4>
-                    <h4>CMPE 273. Professor Simon Shim. Fall 2019</h4>
                 </div>
             )
         }
