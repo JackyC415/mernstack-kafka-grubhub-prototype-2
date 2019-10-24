@@ -1,9 +1,11 @@
+//References: https://react-bootstrap.github.io/components/forms/
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import '../../App.css'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import '../../App.css';
 
 class Register extends Component {
     constructor(props) {
