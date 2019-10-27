@@ -47,12 +47,7 @@ class Register extends Component {
         const buyerData = {
             name: this.state.name,
             email: this.state.email,
-            password: this.state.password,
-            restaurantname: "N/A",
-            cuisine: "N/A",
-            zipcode: "N/A",
-            phone: "N/A",
-            owner: false
+            password: this.state.password
         }
 
         const ownerData = {
@@ -61,8 +56,6 @@ class Register extends Component {
             password: this.state.password,
             restaurantname: this.state.restaurantname,
             zipcode: this.state.zipcode,
-            cuisine: "N/A",
-            phone: "N/A",
             owner: true
         }
 
