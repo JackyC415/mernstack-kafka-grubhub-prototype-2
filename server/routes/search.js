@@ -1,5 +1,3 @@
-const connection = require('./database');
-
 exports.searchItemByName = (req, res) => {
     console.log(req.body.item);
     console.log("INSIDE SEARCH ITEM")

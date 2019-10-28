@@ -38,6 +38,7 @@ app.use(session({
 mongoose.connect('mongodb://localhost:27017/lab2', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(() => console.log("MongoDB successfully connected!"))
   .catch(err => console.log(err));
+mongoose.set('useFindAndModify', false);
 
 const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
 const { getBuyerOrders, addToCart, getBuyerCart } = require('./routes/buyer');

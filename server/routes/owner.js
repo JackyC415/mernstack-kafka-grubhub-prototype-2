@@ -1,5 +1,3 @@
-const connection = require('./database');
-
 exports.getOwnerID = (req, res) => {
     res.send(req.session.ownerID);
 };

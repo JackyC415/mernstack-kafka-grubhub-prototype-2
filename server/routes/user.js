@@ -1,7 +1,6 @@
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const connection = require('./database');
 const Users = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -98,7 +97,7 @@ exports.login = (req, res) => {
                     res.end("Successful Login!");
                     console.log('Logged in successfully!');
                 } else {
-                    return res.status(400).json('Incorrect password!');
+                    return res.status(400).send('Incorrect password!');
                 }
             });
         });
@@ -110,18 +109,15 @@ exports.getProfile = (req, res) => {
     console.log('Retrieving Profile...');
     if (!req.session.isLoggedIn) {
         res.sendStatus(404);
-        console.log("User has to be logged in to retrieve profile...");
     } else {
-        let profileSQL = "SELECT * FROM user WHERE email = ?";
-        connection.query(profileSQL, [req.session.email], (err, results) => {
-            if (err) {
+        Users.findById({ _id: req.session.ID }, (err, user) =>{
+            if(err) {
                 throw err;
-            } else if (results.length > 0) {
-                console.log(results);
-                res.status(200).send(results);
+            } else if (user) {
+                console.log(user);
+                res.status(200).send(user);
             } else {
-                console.log("Can't find user for profile page!");
-                res.sendStatus(404);
+                return res.status(404).send("Profile does not exist!");
             }
         });
     }
@@ -130,23 +126,19 @@ exports.getProfile = (req, res) => {
 exports.updateProfile = (req, res) => {
 
     console.log('Updating Profile...');
-    const { name, email, restaurantname, cuisine, phone } = req.body;
+    console.log(req.body);
     if (!req.session.isLoggedIn) {
         console.log("Please log in to update profile.");
     } else {
-        let updateProfile = "UPDATE user " + "SET name = ?, email = ?, restaurantname = ?, cuisine = ?, phone = ? WHERE id = ?";
-        connection.query(updateProfile, [name, email, restaurantname, cuisine, phone, req.session.ID], (err, results) => {
-            if (err) {
-                throw err;
-            } else {
-                res.send('Updated profile successfully!');
-            }
+        Users.findByIdAndUpdate(req.session.ID, req.body, (err, user) => {
+            if(err) throw err;
+            res.status(200).send("Updated profile successfully!");
         });
     }
 };
 
 exports.logOut = (req, res) => {
-    console.log("Logged out...");
+    console.log("Logging out...");
     req.session.isLoggedIn = false;
     res.sendStatus(200);
 };

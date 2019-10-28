@@ -23,11 +23,11 @@ class Profile extends Component {
         axios.get('http://localhost:3001/getProfile')
         .then(res => {
           if (res)
-          this.setState({ name: res.data[0].name });
-          this.setState({ email: res.data[0].email });
-          this.setState({ restaurantname: res.data[0].restaurantname });
-          this.setState({ phone: res.data[0].phone});
-          this.setState({ cuisine: res.data[0].cuisine});
+          this.setState({ name: res.data.name });
+          this.setState({ email: res.data.email });
+          this.setState({ restaurantname: res.data.restaurantname });
+          this.setState({ phone: res.data.phone});
+          this.setState({ cuisine: res.data.cuisine});
           this.setState({ loading: true });
         }).catch((err) => {
           console.log('Profile Error: ' + err);
@@ -39,12 +39,10 @@ class Profile extends Component {
     }
 
     updateProfile = (data) => {
-        
         axios.post('http://localhost:3001/updateProfile', data)
             .then(res => {
                 this.setState({ output: res.data })
             });
-            console.log(data);
     }
 
     updateOwner = (e) => {
@@ -54,8 +52,7 @@ class Profile extends Component {
             name: this.state.name,
             email: this.state.email,
             restaurantname: this.state.restaurantname,
-            cuisine: this.state.cuisine,
-            phone: "N/A"
+            cuisine: this.state.cuisine
         }
         this.updateProfile(ownerData);
     }
@@ -66,9 +63,7 @@ class Profile extends Component {
         const buyerData = {
             name: this.state.name,
             email: this.state.email,
-            phone: this.state.phone,
-            restaurantname: "N/A",
-            cuisine: "N/A"
+            phone: this.state.phone
         }
         this.updateProfile(buyerData);
     }

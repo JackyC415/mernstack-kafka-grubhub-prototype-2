@@ -1,5 +1,3 @@
-const connection = require('./database');
-
 exports.getBuyerOrders = (req, res) => {
     console.log("Retrieving Buyer Orders...");
     if (!req.session.isLoggedIn) {
