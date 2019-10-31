@@ -5,8 +5,9 @@ import login from './User/Login';
 import register from './User/Register';
 import profile from './User/Profile';
 import buyerhome from './Buyer/Homepage';
-import viewCart from './Buyer/ViewCart';
-import addToCart from './Buyer/AddToCart';
+import ListDocument from './Buyer/ListDocument';
+import EditDocument from './Buyer/EditDocument';
+import addDocument from './Buyer/AddDocument';
 import ownerhome from './Owner/Homepage';
 import ownerMenu from './Owner/Menu';
 import viewOrder from './Owner/ViewOrder';
@@ -22,8 +23,9 @@ class Main extends Component {
                 <Route path="/login" component={login} />
                 <Route path="/profile" component={profile} />
                 <Route path="/buyerhome" component={buyerhome} />
-                <Route path="/buyerhome/addtocart" component={addToCart} />
-                <Route path="/buyerhome/viewcart" component={viewCart} />
+                <Route path="/listDocument" component={ListDocument} />
+                <Route path="/getItemToEdit/:id" component={EditDocument} />
+                <Route path="/addDocument" component={addDocument} />
                 <Route path="/ownerhome" component={ownerhome} />
                 <Route path="/ownerhome/vieworder" component={viewOrder} />
                 <Route path="/ownerhome/menu" component={ownerMenu} />

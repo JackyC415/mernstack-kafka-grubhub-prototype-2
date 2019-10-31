@@ -101,7 +101,7 @@ class BuyerHome extends Component {
             <div>
                 {redirectHome}
                 <h2>Buyer Homepage</h2>
-                <li><Link to="/buyerhome/viewcart">Cart</Link></li>
+                <li><Link to="/listdocument">Cart</Link></li>
                 <MDBCol md="6">
                     <form className="form-inline mt-4 mb-4" onSubmit={this.handleSubmit}>
                         <MDBIcon icon="search" />

@@ -48,7 +48,6 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
         const credential = {
             email: this.state.email,
             password: this.state.password
@@ -70,15 +69,13 @@ class Login extends Component {
                     <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange} required />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
-            </Form.Text>
-            </Form.Group>
+                </Form.Text>
+                </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="16" value={this.state.password} onChange={this.handleChange} required />
-            </Form.Group>
-                <Button variant="primary" type="submit">
-                    Login
-            </Button>
+                </Form.Group>
+            <Button variant="primary" type="submit">Login</Button>
             <div>New? <Link to="/register">Create account</Link></div>
             <div>{this.state.output}</div>
             </Form>

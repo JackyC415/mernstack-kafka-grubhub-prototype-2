@@ -1,68 +1,84 @@
-exports.getOwnerID = (req, res) => {
-    res.send(req.session.ownerID);
-};
+const Menus = require("../models/Menu");
 
 exports.getOwnerMenu = (req, res) => {
-    if (req.session.isLoggedIn) {
-        let ownerMenu = "SELECT * FROM menus WHERE menu_owner = ? AND menu_section = ?";
-        connection.query(ownerMenu, [req.session.ID, req.body.menu_section], (err, results) => {
+
+    if (!req.session.isLoggedIn) {
+        console.log("Please log in to update profile.");
+    } else {
+        Menus.find({ owner_id: req.session.ID }, (err, items) => {
             if (err) {
                 throw err;
-            } else if (results.length > 0) {
-                console.log("Sending owner menu's result...")
-                res.send(results);
+            } else if (items) {
+                res.status(200).send(items);
             } else {
-                console.log("Can't find owner's menu!");
+                return res.status(404).send("No items on the menu!");
             }
         });
-    } else {
-        console.log("Please log in first!");
     }
 };
 
 exports.removeItem = (req, res) => {
     console.log("INSIDE REMOVE ITEM")
-    const { p_name, p_description, p_image, p_quantity, p_price } = req.body;
-    console.log(req.body);
-    if (req.session.isLoggedIn) {
-        let ownerMenu = "DELETE FROM menus WHERE p_name = ? AND p_description = ? AND p_image = ? AND p_quantity = ? AND p_price = ? LIMIT 1";
-        connection.query(ownerMenu, [p_name, p_description, p_image, p_quantity, p_price], (err, results) => {
-            if (err) {
-                throw err;
-            } else {
-                res.sendStatus(200);
-                console.log("DELETED!");
-            }
-        });
+    if (!req.session.isLoggedIn) {
+        return res.status(400).json("Please login!");
     } else {
-        console.log("Please log in first!");
+        Menus.findByIdAndRemove({ _id: req.params.id }, function (err) {
+            if (err) throw err;
+            res.status(200).json('Deleted item!');
+        });
     }
 };
 
 exports.saveItem = (req, res) => {
     console.log('INSIDE SAVE ITEM')
-    const { p_id, p_name, p_description, p_image, p_quantity, p_price, menu_section } = req.body;
+
     if (!req.session.isLoggedIn) {
-        console.log("Please log in first!");
+        return res.status(400).json("Please login!");
     } else {
-        let findItem = "SELECT p_id FROM menus WHERE menu_owner = ? AND p_id = ? AND menu_section = ?";
-        connection.query(findItem, [req.session.ID, p_id, menu_section], (err, results) => {
-            if (err) {
-                throw err;
-            } else if (results.length > 0) {
-                let updateItem = "UPDATE menus " + "SET p_name = ?, p_description = ?, p_image = ?, p_quantity = ?, p_price = ? WHERE p_id = ?";
-                connection.query(updateItem, [p_name, p_description, p_image, p_quantity, p_price, p_id], (err, results) => {
-                    if (err) throw err;
-                    console.log(results);
-                });
+        Menus.findOne({ _id: req.body._id }).then(item => {
+            if (item) {
+                return res.status(400).json("Item already exists!");
             } else {
-                let insertItem = "INSERT INTO menus " + "SET p_name = ?, p_description = ?, p_image = ?, p_quantity = ?, p_price = ?, menu_section = ?, menu_owner = ?";
-                connection.query(insertItem, [p_name, p_description, p_image, p_quantity, p_price, menu_section, req.session.ID], (err, results) => {
-                    if (err) throw err;
-                    console.log(results);
+                const newMenuItem = new Menus({
+                    item_name: req.body.item_name,
+                    item_desc: req.body.item_desc,
+                    item_image: req.body.item_image,
+                    item_quantity: req.body.item_quantity,
+                    item_price: req.body.item_price,
+                    owner_id: req.session.ID
                 });
+                newMenuItem.save()
+                    .then(() => res.status(200).json('Item added!'))
+                    .catch(err => res.status(400).json(err))
             }
         });
-        res.sendStatus(200);
+    }
+};
+
+exports.editItem = (req, res) => {
+    console.log("INSIDE EDIT ITEM")
+    if (!req.session.isLoggedIn) {
+        return res.status(400).json("Please login!");
+    } else {
+        Menus.findByIdAndUpdate({ _id: req.params.id }, function (err) {
+            if (err) throw err;
+            res.status(200).json('Updated item!');
+        });
+    }
+};
+
+exports.getItemToEdit = (req, res) => {
+    console.log("INSIDE EDIT ITEM")
+    if (!req.session.isLoggedIn) {
+        return res.status(400).json("Please login!");
+    } else {
+        Menus.findById({ _id: req.params.id }, (err, item) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(item);
+                res.status(200).send(item);
+            }
+        });
     }
 };
