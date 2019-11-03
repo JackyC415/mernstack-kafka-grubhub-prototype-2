@@ -30,14 +30,14 @@ exports.removeItem = (req, res) => {
 };
 
 exports.saveItem = (req, res) => {
-    console.log('INSIDE SAVE ITEM')
+    console.log('INSIDE ADD ITEM MENU');
 
     if (!req.session.isLoggedIn) {
         return res.status(400).json("Please login!");
     } else {
-        Menus.findOne({ _id: req.body._id }).then(item => {
+        Menus.findOne({ item_name: req.body.item_name }).then(item => {
             if (item) {
-                return res.status(400).json("Item already exists!");
+                res.status(400).json("Item already exists!");
             } else {
                 const newMenuItem = new Menus({
                     item_name: req.body.item_name,
@@ -48,21 +48,28 @@ exports.saveItem = (req, res) => {
                     owner_id: req.session.ID
                 });
                 newMenuItem.save()
-                    .then(() => res.status(200).json('Item added!'))
+                    .then(() => res.status(200).json('Added menu item!'))
                     .catch(err => res.status(400).json(err))
             }
         });
     }
 };
 
-exports.editItem = (req, res) => {
+exports.updateItem = (req, res) => {
     console.log("INSIDE EDIT ITEM")
     if (!req.session.isLoggedIn) {
         return res.status(400).json("Please login!");
     } else {
-        Menus.findByIdAndUpdate({ _id: req.params.id }, function (err) {
+        const updateItem = {
+            item_name: req.body.item_name,
+            item_desc: req.body.item_desc,
+            item_image: req.body.item_image,
+            item_quantity: req.body.item_quantity,
+            item_price: req.body.item_price
+        }
+        Menus.findOneAndUpdate({ _id: req.body.id }, updateItem, function (err) {
             if (err) throw err;
-            res.status(200).json('Updated item!');
+            res.status(200).json(true);
         });
     }
 };

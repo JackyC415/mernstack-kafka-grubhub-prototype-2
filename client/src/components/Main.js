@@ -10,7 +10,7 @@ import EditDocument from './Buyer/EditDocument';
 import addDocument from './Buyer/AddDocument';
 import ownerhome from './Owner/Homepage';
 import ownerMenu from './Owner/Menu';
-import viewOrder from './Owner/ViewOrder';
+import Search from './Buyer/Search';
 
 //Create a Main Component
 class Main extends Component {
@@ -27,8 +27,8 @@ class Main extends Component {
                 <Route path="/getItemToEdit/:id" component={EditDocument} />
                 <Route path="/addDocument" component={addDocument} />
                 <Route path="/ownerhome" component={ownerhome} />
-                <Route path="/ownerhome/vieworder" component={viewOrder} />
                 <Route path="/ownerhome/menu" component={ownerMenu} />
+                <Route path="/search/pagination" component={Search} />
             </div>
         )
     }

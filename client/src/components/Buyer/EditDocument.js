@@ -34,7 +34,7 @@ class EditDocument extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  editMenuItem = () => {
+  updateMenuItem = () => {
 
     const data = {
       item_name: this.state.item_name,
@@ -45,9 +45,9 @@ class EditDocument extends Component {
       id: this.props.match.params.id
     };
 
-    axios.post('editItem', data)
+    axios.post('http://localhost:3001/updateItem', data)
       .then(json => {
-        (json.data.statusCode === 200) ? this.props.history.push('/listDocument') : this.props.history.push('/listDocument');
+        this.props.history.push('/listDocument');
       }).catch((error) => {
         console.log(error);
       });
@@ -56,7 +56,7 @@ class EditDocument extends Component {
   render() {
     return (
       <div>
-        <h2 className="text-center">Edit Menu Item</h2>
+        <h1 className="text-center">Edit Menu Item</h1>
         <div className="row justify-content-md-center">
           <div className="col-md-6 col-md-offset-3">
             <form>
@@ -80,7 +80,7 @@ class EditDocument extends Component {
                 <label>Price:</label>
                 <input name="item_price" type="text" className="form-control" onChange={this.handleChange} value={this.state.item_price}></input>
               </div>
-              <button type="button" onClick={this.editMenuItem} className="btn btn-primary">Add</button>
+              <button type="button" onClick={this.updateMenuItem} className="btn btn-primary">Update</button>
             </form>
           </div>
         </div>

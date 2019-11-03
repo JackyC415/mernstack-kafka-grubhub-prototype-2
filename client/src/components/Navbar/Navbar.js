@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 import cookie from 'react-cookies';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import { breakfastItems } from '../Owner/BreakfastMenu';
-import { lunchItems } from '../Owner/LunchMenu';
-import { appetizerItems } from '../Owner/AppetizerMenu';
 
 import {
     Collapse,
@@ -30,9 +27,6 @@ class NavbarPage extends Component {
     }
     //empty UI menu table upon logout & delete cookie.
     handleLogout = () => {
-        breakfastItems.length = 0;
-        lunchItems.length = 0;
-        appetizerItems.length = 0;
         axios.post('http://localhost:3001/logOut')
             .then(res => {
                 if (res) console.log("Logged Out!");

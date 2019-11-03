@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { MDBCol, MDBIcon } from "mdbreact";
 import axios from 'axios';
-import { Redirect } from 'react-router';
-import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
 
 class BuyerHome extends Component {
@@ -31,7 +29,6 @@ class BuyerHome extends Component {
             .then(res => {
                 if (res.status === 200) {
                     this.setState({ resultTable: res.data });
-                    //this.setState({ redirectSearch: true })
                 } else {
                     this.setState({ redirectSearch: false })
                 }
@@ -40,7 +37,7 @@ class BuyerHome extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.sendRestAPI({ item: this.state.item });
+        this.props.history.push("/search/pagination");
     }
 
     showFilterPage = (e) => {
@@ -56,9 +53,6 @@ class BuyerHome extends Component {
     }
 
     render() {
-        if (this.state.redirectSearch) {
-            return <Redirect to="/buyerhome/search" />;
-        }
 
         let filterPage = null;
         if(this.state.viewFilter) {
@@ -74,10 +68,6 @@ class BuyerHome extends Component {
                 </tbody>
             </table>
             </div>
-        }
-        let redirectHome = null;
-        if (cookie.load('cookie') !== 'owner') {
-            redirectHome = <Redirect to="/buyerhome" />
         }
 
         let showRestaurants = null;
@@ -99,7 +89,6 @@ class BuyerHome extends Component {
         }
         return (
             <div>
-                {redirectHome}
                 <h2>Buyer Homepage</h2>
                 <li><Link to="/listdocument">Cart</Link></li>
                 <MDBCol md="6">

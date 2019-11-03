@@ -81,11 +81,11 @@ class Register extends Component {
                 <div>
                     <Form.Group controlId="formRestaurantname">
                         <Form.Label>Restaurant Name:</Form.Label>
-                        <Form.Control type="text" name="restaurantname" maxlength="30" placeholder="Restaurant name" value={this.state.restaurantname} onChange={this.handleChange} required />
+                        <Form.Control type="text" name="restaurantname" maxLength="30" placeholder="Restaurant name" value={this.state.restaurantname} onChange={this.handleChange} required />
                     </Form.Group>
                     <Form.Group controlId="formZipcode">
                         <Form.Label>Zipcode:</Form.Label>
-                        <Form.Control type="number" name="zipcode" maxlength="5" placeholder="5 digits" value={this.state.zipcode} onChange={this.handleChange} required/>
+                        <Form.Control type="number" name="zipcode" maxLength="5" placeholder="5 digits" value={this.state.zipcode} onChange={this.handleChange} required/>
                     </Form.Group>
                 </div>
             accountType = "User";
@@ -97,7 +97,7 @@ class Register extends Component {
                     <h2>Create account</h2>
                     <Form.Group controlId="formUsername">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name="name" placeholder="Your name" minlength="3" maxlength="30" value={this.state.name} onChange={this.handleChange} required />
+                        <Form.Control type="text" name="name" placeholder="Your name" minLength="3" maxLength="30" value={this.state.name} onChange={this.handleChange} required />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -105,7 +105,7 @@ class Register extends Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="16" value={this.state.password} onChange={this.handleChange} required />
+                        <Form.Control type="password" name="password" placeholder="At least 6 characters" minLength="6" maxLength="16" value={this.state.password} onChange={this.handleChange} required />
                     </Form.Group>
                     {ownerForm}
                     <Button variant="primary" type="submit">

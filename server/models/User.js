@@ -6,6 +6,11 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  image: {
+    type: Buffer,
+    required: true,
+    default: 0
+  },
   email: {
     type: String,
     required: true,
@@ -33,9 +38,9 @@ const UserSchema = new Schema({
     default: "N/A"
   },
   zipcode: {
-    type: String,
+    type: Number,
     required: true,
-    default: "N/A"
+    default: 00000
   },
   owner: {
     type: Boolean,

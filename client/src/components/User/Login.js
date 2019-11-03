@@ -7,15 +7,15 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import '../../App.css'
+import '../../App.css'  
 
 class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: null,
-            password: null,
+            email: '',
+            password: '',
             authFlag: false
         };
 
@@ -23,14 +23,17 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
-        this.setState({
-            authFlag: false
-        })
-    }
-
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let credential = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        this.sendRestAPI(credential);
     }
 
     sendRestAPI = (data) => {
@@ -44,15 +47,6 @@ class Login extends Component {
                     this.setState({ authFlag: false })
                 }
             });
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const credential = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        this.sendRestAPI(credential);
     }
 
     render() {
@@ -73,7 +67,7 @@ class Login extends Component {
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="16" value={this.state.password} onChange={this.handleChange} required />
+                    <Form.Control type="password" name="password" placeholder="At least 6 characters" minLength="6" maxLength="16" value={this.state.password} onChange={this.handleChange} required />
                 </Form.Group>
             <Button variant="primary" type="submit">Login</Button>
             <div>New? <Link to="/register">Create account</Link></div>

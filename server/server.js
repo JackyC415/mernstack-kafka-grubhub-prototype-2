@@ -43,7 +43,7 @@ mongoose.set('useFindAndModify', false);
 
 const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
 const { getBuyerOrders, addToCart, getBuyerCart } = require('./routes/buyer');
-const { getItemToEdit, getOwnerMenu, editItem, removeItem, saveItem } = require('./routes/owner');
+const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem } = require('./routes/owner');
 const { searchItemByName, filterItemByName } = require('./routes/search');
 
 app.get('/getProfile', getProfile);
@@ -58,7 +58,7 @@ app.post('/updateProfile', updateProfile);
 app.post('/logOut', logOut);
 app.post('/addToCart', addToCart);
 app.delete('/removeItem/:id', removeItem);
-app.post('/editItem', editItem);
+app.post('/updateItem', updateItem);
 app.post('/saveItem', saveItem);
 app.post('/searchItemByName', searchItemByName);
 app.post('/filterItemByName', filterItemByName);

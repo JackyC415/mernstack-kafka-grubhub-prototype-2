@@ -2,9 +2,7 @@
 import React, { Component }  from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
-import BreakfastMenu from './BreakfastMenu';
-import LunchMenu from './LunchMenu';
-import AppetizerMenu from './AppetizerMenu';
+import ListDocument from '../Buyer/ListDocument';
 
 class OwnerMenu extends Component {
   constructor(props) {
@@ -12,7 +10,8 @@ class OwnerMenu extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      items: ''
     };
   }
 
@@ -40,7 +39,7 @@ class OwnerMenu extends Component {
           <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
+              onClick={() => { this.toggle('2');}}
             >
               Lunch
             </NavLink>
@@ -60,7 +59,7 @@ class OwnerMenu extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <h4><BreakfastMenu/></h4>
+                <h4>1</h4>
               </Col>
             </Row>
           </TabPane>
@@ -68,7 +67,7 @@ class OwnerMenu extends Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="12">
-              <h4><LunchMenu/></h4>
+                <h4><ListDocument/></h4>
               </Col>
             </Row>
           </TabPane>
@@ -76,7 +75,7 @@ class OwnerMenu extends Component {
            <TabPane tabId="3">
             <Row>
               <Col sm="12">
-              <h4><AppetizerMenu/></h4>
+              <h4>3</h4>
               </Col>
             </Row>
           </TabPane>

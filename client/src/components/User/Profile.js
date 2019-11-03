@@ -91,6 +91,8 @@ class Profile extends Component {
                 </div>
         }
         return <div>
+            <label for="avatar">Choose a profile picture:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"></input>
             {renderPage}
             <div> {this.state.output} </div>
         </div>

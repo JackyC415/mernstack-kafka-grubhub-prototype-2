@@ -25,8 +25,7 @@ class AddDocument extends Component {
 
     axios.post('http://localhost:3001/saveItem', data)
       .then(res => {
-        (res.status === 200) ? alert('Item saved!') : alert('Item already exists!');
-        this.props.history.push('/listDocument')
+        this.props.history.push('/listDocument');
       });
   }
 
@@ -61,7 +60,7 @@ class AddDocument extends Component {
                 <label>Price:</label>
                 <input name="item_price" type="text" className="form-control" onChange={this.handleChange} value={this.state.item_price}></input>
               </div>
-              <button type="button" onClick={this.addItemToMenu} className="btn btn-primary">Add</button>
+              <button type="button" onClick={this.addItemToMenu} className="btn btn-primary">Add Item</button>
             </form>
           </div>
         </div>

@@ -42,9 +42,7 @@ class ListDocument extends Component {
               <td></td>
             </tr>
           </thead>
-          <tbody>
-            {this.tabRow()}
-          </tbody>
+          <tbody> {this.tabRow()} </tbody>
         </table>
       </div>
     );
