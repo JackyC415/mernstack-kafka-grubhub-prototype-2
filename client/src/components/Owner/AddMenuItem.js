@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class AddDocument extends Component {
+class AddMenuItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
       item_name: '',
       item_desc: '',
       item_image: '',
-      item_quantity: '',
-      item_price: ''
+      item_quantity: 0,
+      item_price: 0,
+      item_section: 'Breakfast'
     }
   }
 
@@ -20,12 +21,14 @@ class AddDocument extends Component {
       item_desc: this.state.item_desc,
       item_image: this.state.item_image,
       item_quantity: this.state.item_quantity,
-      item_price: this.state.item_price
+      item_price: this.state.item_price,
+      item_section: this.state.item_section
     };
 
     axios.post('http://localhost:3001/saveItem', data)
       .then(res => {
-        this.props.history.push('/listDocument');
+        console.log(JSON.stringify(res));
+        this.props.history.push('/ownerhome/menu');
       });
   }
 
@@ -60,6 +63,14 @@ class AddDocument extends Component {
                 <label>Price:</label>
                 <input name="item_price" type="text" className="form-control" onChange={this.handleChange} value={this.state.item_price}></input>
               </div>
+              <div className="form-group">
+              <label>Section: </label>
+               <select name="item_section" onChange={this.handleChange} value={this.state.item_section}>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Appetizer">Appetizer</option>
+               </select>
+               </div>
               <button type="button" onClick={this.addItemToMenu} className="btn btn-primary">Add Item</button>
             </form>
           </div>
@@ -70,4 +81,4 @@ class AddDocument extends Component {
 
 }
 
-export default AddDocument;
+export default AddMenuItem;

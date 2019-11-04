@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class TableRow extends Component {
+class RemoveCartItem extends Component {
   constructor(props) {
     super(props);
   }
 
-  removeMenuItem = () => {
-    axios.delete('http://localhost:3001/removeItem/' + this.props.obj._id)
+  removeCart = () => {
+    axios.delete('http://localhost:3001/cancelCartItem/' + this.props.obj._id)
       .then(res => {
         if (res.status === 200) {
-          alert("Deleted item: " + this.props.obj._id + " successfully!");
-          this.props.history.push('/listDocument');
+          alert("Removed item: " + this.props.obj._id + " successfully!");
+          this.props.history.push('/viewCart');
         } else {
           this.props.history.push('/');
         }
@@ -30,10 +29,9 @@ class TableRow extends Component {
         <td>{this.props.obj.item_image}</td>
         <td>{this.props.obj.item_quantity}</td>
         <td>{this.props.obj.item_price}</td>
-        <td><Link to={"/getItemToEdit/" + this.props.obj._id} className="btn btn-primary">Edit</Link></td>
         <td>
           <form >
-            <button type="button" onClick={this.removeMenuItem} className="btn btn-danger">Delete</button>
+            <button type="button" onClick={this.removeCart} className="btn btn-danger">Cancel</button>
           </form>
         </td>
       </tr>
@@ -41,4 +39,4 @@ class TableRow extends Component {
   }
 }
 
-export default withRouter(TableRow);
+export default withRouter(RemoveCartItem);

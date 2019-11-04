@@ -7,7 +7,7 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import '../../App.css'  
+import '../../App.css'
 
 class Login extends Component {
     constructor(props) {
@@ -33,6 +33,7 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
+        //this.props.loginUser(credential);
         this.sendRestAPI(credential);
     }
 
@@ -46,6 +47,7 @@ class Login extends Component {
                 } else {
                     this.setState({ authFlag: false })
                 }
+                console.log(res.token);
             });
     }
 
@@ -56,23 +58,23 @@ class Login extends Component {
         }
         return (
             <div>{redirectHome}
-            <Form onSubmit={this.handleSubmit} className="login-form">
-            <h2>Login</h2>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                <Form onSubmit={this.handleSubmit} className="login-form">
+                    <h2>Login</h2>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                        <Form.Text className="text-muted">
+                            We'll never share your email with anyone else.
                 </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="At least 6 characters" minLength="6" maxLength="16" value={this.state.password} onChange={this.handleChange} required />
-                </Form.Group>
-            <Button variant="primary" type="submit">Login</Button>
-            <div>New? <Link to="/register">Create account</Link></div>
-            <div>{this.state.output}</div>
-            </Form>
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" name="password" placeholder="At least 6 characters" minLength="6" maxLength="16" value={this.state.password} onChange={this.handleChange} required />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Login</Button>
+                    <div>New? <Link to="/register">Create account</Link></div>
+                    <div>{this.state.output}</div>
+                </Form>
             </div>
         )
     }

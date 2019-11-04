@@ -6,14 +6,13 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require('body-parser');
 const User = require("./models/User");
-const Menu = require("./models/Menu");
 const PORT = process.env.PORT || 3001;
 
-//Authentication w/ passport
+//User authentication with passport
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
-//cors for cross origin resources sharing
+//cross origin resources sharing
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(bodyParser.json());
 
@@ -43,7 +42,7 @@ mongoose.set('useFindAndModify', false);
 
 const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
 const { getBuyerOrders, addToCart, getBuyerCart } = require('./routes/buyer');
-const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem } = require('./routes/owner');
+const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem, getBreakfastMenu } = require('./routes/owner');
 const { searchItemByName, filterItemByName } = require('./routes/search');
 
 app.get('/getProfile', getProfile);
@@ -51,17 +50,19 @@ app.get('/getBuyerOrders', getBuyerOrders);
 app.get('/getBuyerCart', getBuyerCart);
 app.get('/getOwnerMenu', getOwnerMenu);
 app.get('/getItemToEdit/:id', getItemToEdit);
+app.get('/getBreakfastMenu', getBreakfastMenu);
 
 app.post('/login', login);
 app.post('/register', register);
 app.post('/updateProfile', updateProfile);
 app.post('/logOut', logOut);
 app.post('/addToCart', addToCart);
-app.delete('/removeItem/:id', removeItem);
 app.post('/updateItem', updateItem);
 app.post('/saveItem', saveItem);
 app.post('/searchItemByName', searchItemByName);
 app.post('/filterItemByName', filterItemByName);
+
+app.delete('/removeItem/:id', removeItem);
 
 module.exports = app;
 app.listen(PORT, () => console.log('Grubhub server listening on port:', PORT));

@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import navbar from './Navbar/Navbar';
-import login from './User/Login';
-import register from './User/Register';
-import profile from './User/Profile';
-import buyerhome from './Buyer/Homepage';
-import ListDocument from './Buyer/ListDocument';
-import EditDocument from './Buyer/EditDocument';
-import addDocument from './Buyer/AddDocument';
-import ownerhome from './Owner/Homepage';
-import ownerMenu from './Owner/Menu';
+
+import Navbar from './Navbar/Navbar';
+import Login from './User/Login';
+import Register from './User/Register';
+import Profile from './User/Profile';
+
+import OwnerHome from './Owner/Homepage';
+import OwnerMenu from './Owner/Menu';
+import UpdateMenuItem from './Owner/UpdateMenuItem';
+import AddMenuItem from './Owner/AddMenuItem';
+import ViewOrder from './Owner/ViewOrder';
+
+import BuyerHome from './Buyer/Homepage';
 import Search from './Buyer/Search';
+import ViewCart from './Buyer/ViewCart';
+import AddToCart from './Buyer/AddToCart';
 
 //Create a Main Component
 class Main extends Component {
@@ -18,17 +23,19 @@ class Main extends Component {
         return (
             <div>
                 {/*Render Different Component based on Route*/}
-                <Route path="/" component={navbar} />
-                <Route path="/register" component={register} />
-                <Route path="/login" component={login} />
-                <Route path="/profile" component={profile} />
-                <Route path="/buyerhome" component={buyerhome} />
-                <Route path="/listDocument" component={ListDocument} />
-                <Route path="/getItemToEdit/:id" component={EditDocument} />
-                <Route path="/addDocument" component={addDocument} />
-                <Route path="/ownerhome" component={ownerhome} />
-                <Route path="/ownerhome/menu" component={ownerMenu} />
+                <Route path="/" component={Navbar} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/buyerhome" component={BuyerHome} />
+                <Route path="/viewCart" component={ViewCart} />
+                <Route path="/addToCart" component={AddToCart} />
+                <Route path="/getItemToEdit/:id" component={UpdateMenuItem} />
+                <Route path="/addMenuItem" component={AddMenuItem} />
+                <Route path="/ownerhome" component={OwnerHome} />
+                <Route path="/ownerhome/menu" component={OwnerMenu} />
                 <Route path="/search/pagination" component={Search} />
+                <Route path="/ownerhome/vieworder" component={ViewOrder} />
             </div>
         )
     }

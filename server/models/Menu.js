@@ -25,7 +25,8 @@ const MenuSchema = new Schema({
         default: 0
     },
     item_section: {
-        type: String
+        type: String,
+        default: ""
     },
     owner_id: {
         type: String

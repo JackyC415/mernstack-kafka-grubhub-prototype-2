@@ -90,12 +90,18 @@ class BuyerHome extends Component {
         return (
             <div>
                 <h2>Buyer Homepage</h2>
-                <li><Link to="/listdocument">Cart</Link></li>
+                <li><Link to="/viewCart">Cart</Link></li>
                 <MDBCol md="6">
                     <form className="form-inline mt-4 mb-4" onSubmit={this.handleSubmit}>
                         <MDBIcon icon="search" />
-                        <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search item name" aria-label="Search"
-                            name="item" value={this.state.item} onChange={this.handleChange} required />
+                        <input className="form-control form-control-sm ml-3 w-75" 
+                        type="text" 
+                        placeholder="Search item name" 
+                        aria-label="Search"
+                        name="item" 
+                        value={this.state.item} 
+                        onChange={this.handleChange} 
+                        required />
                     </form>
                 </MDBCol>
                 {showRestaurants}

@@ -22,8 +22,8 @@ exports.removeItem = (req, res) => {
     if (!req.session.isLoggedIn) {
         return res.status(400).json("Please login!");
     } else {
-        Menus.findByIdAndRemove({ _id: req.params.id }, function (err) {
-            if (err) throw err;
+        Menus.findOneAndRemove({ _id: req.params.id }, function(err) {
+            if(err) throw err;
             res.status(200).json('Deleted item!');
         });
     }
@@ -45,10 +45,11 @@ exports.saveItem = (req, res) => {
                     item_image: req.body.item_image,
                     item_quantity: req.body.item_quantity,
                     item_price: req.body.item_price,
+                    item_section: req.body.item_section,
                     owner_id: req.session.ID
                 });
                 newMenuItem.save()
-                    .then(() => res.status(200).json('Added menu item!'))
+                    .then(() => res.status(200).json("Item saved!"))
                     .catch(err => res.status(400).json(err))
             }
         });
@@ -85,6 +86,23 @@ exports.getItemToEdit = (req, res) => {
             } else {
                 console.log(item);
                 res.status(200).send(item);
+            }
+        });
+    }
+};
+
+exports.getBreakfastMenu = (req, res) => {
+
+    if (!req.session.isLoggedIn) {
+        console.log("Please log in to update profile.");
+    } else {
+        Menus.find({ owner_id: req.session.ID, item_section: 'Breakfast' }, (err, items) => {
+            if (err) {
+                throw err;
+            } else if (items) {
+                res.status(200).send(items);
+            } else {
+                return res.status(404).send("No items on the menu!");
             }
         });
     }

@@ -1,10 +1,9 @@
 //References: http://reactstrap.github.io/components/navbar/
-
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import cookie from 'react-cookies';
 import axios from 'axios';
-import { Redirect } from 'react-router';
 
 import {
     Collapse,
@@ -25,7 +24,7 @@ class NavbarPage extends Component {
             isOpen: false
         };
     }
-    //empty UI menu table upon logout & delete cookie.
+
     handleLogout = () => {
         axios.post('http://localhost:3001/logOut')
             .then(res => {
@@ -46,7 +45,7 @@ class NavbarPage extends Component {
                     <Navbar color="light" light expand="md">
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink tag={Link} to="/">Grubhub Prototype Lab1</NavLink>
+                                <NavLink tag={Link} to="/">Grubhub Prototype Lab2</NavLink>
                             </NavItem>
                         </Nav>
                         <NavbarToggler onClick={this.toggle} />
@@ -69,7 +68,7 @@ class NavbarPage extends Component {
                     <Navbar color="light" light expand="md">
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink tag={Link} to="/">Grubhub Prototype Lab1 </NavLink>
+                                <NavLink tag={Link} to="/">Grubhub Prototype Lab2 </NavLink>
                             </NavItem>
                         </Nav>
                         <div>

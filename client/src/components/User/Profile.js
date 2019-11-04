@@ -8,13 +8,13 @@ class Profile extends Component {
         super(props);
 
         this.state = {
-            name: null,
-            email: null,
-            restaurantname: null,
-            phone: null,
-            cuisine: null,
+            name: '',
+            email: '',
+            restaurantname: '',
+            phone: '',
+            cuisine: '',
+            output: '',
             loading: false,
-            output: null
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -22,15 +22,16 @@ class Profile extends Component {
     componentDidMount() {
         axios.get('http://localhost:3001/getProfile')
             .then(res => {
-                if (res)
+                if (res.status === 200) {
                     this.setState({ name: res.data.name });
-                this.setState({ email: res.data.email });
-                this.setState({ restaurantname: res.data.restaurantname });
-                this.setState({ phone: res.data.phone });
-                this.setState({ cuisine: res.data.cuisine });
-                this.setState({ loading: true });
+                    this.setState({ email: res.data.email });
+                    this.setState({ restaurantname: res.data.restaurantname });
+                    this.setState({ phone: res.data.phone });
+                    this.setState({ cuisine: res.data.cuisine });
+                    this.setState({ loading: true });
+                }
             }).catch((err) => {
-                console.log('Profile Error: ' + err);
+                console.log(err);
             })
     }
 
@@ -79,6 +80,7 @@ class Profile extends Component {
                     Email: <input type="email" name="email" defaultValue={this.state.email} onChange={this.handleChange} required ></input><br />
                     Restaurant: <input type="text" name="restaurantname" defaultValue={this.state.restaurantname} onChange={this.handleChange} required></input><br />
                     Cuisine: <input type="text" name="cuisine" defaultValue={this.state.cuisine} onChange={this.handleChange} required></input><br />
+                    Phone: <input type="text" name="phone" defaultValue={this.state.phone} onChange={this.handleChange} required></input><br />
                     <button onClick={this.updateOwner}>Update Profile</button>
                 </div>
         } else if (cookie.load('cookie') === 'buyer') {

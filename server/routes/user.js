@@ -1,3 +1,4 @@
+//References: https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -5,8 +6,8 @@ const Users = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 exports.register = (req, res) => {
-
     console.log('Registering...');
+
     //input validation with joi
     const schema = Joi.object({
         name: Joi.string().min(3).max(30).required(),
@@ -40,7 +41,7 @@ exports.register = (req, res) => {
                         if (err) throw err;
                         newUser.password = hash;
                         newUser.save()
-                            .then(() => res.json('User added!'))
+                            .then(() => res.json('Registered!'))
                             .catch(err => res.status(400).json('Error: ' + err))
                     });
                 }
@@ -52,15 +53,15 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-
     console.log('Login...');
+
     //validate user inputs w/ Joi
     const schema = Joi.object({
         email: Joi.string().lowercase().trim().email().required(),
         password: Joi.string().min(6).max(16).pattern(/^[a-zA-Z0-9]{3,30}$/).required()
     });
 
-    //once validated, query user credential and validate against hash password w/ bcrypt
+    //once validated, query user credential and validate against hash password w/ bcrypt and jwt
     const { error, value } = schema.validate({ email: req.body.email, password: req.body.password });
     if (error) {
         throw error;
@@ -82,7 +83,6 @@ exports.login = (req, res) => {
                             });
                         }
                     );
-
                     if (!user.owner) {
                         res.cookie('cookie', "buyer", { maxAge: 900000, httpOnly: false, path: '/' });
                     } else {
@@ -95,7 +95,6 @@ exports.login = (req, res) => {
                         'Content-Type': 'text/plain'
                     })
                     res.end("Successful Login!");
-                    console.log('Logged in successfully!');
                 } else {
                     return res.status(400).send('Incorrect password!');
                 }
@@ -105,13 +104,12 @@ exports.login = (req, res) => {
 };
 
 exports.getProfile = (req, res) => {
-
     console.log('Retrieving Profile...');
     if (!req.session.isLoggedIn) {
         res.sendStatus(404);
     } else {
-        Users.findById({ _id: req.session.ID }, (err, user) =>{
-            if(err) {
+        Users.findById({ _id: req.session.ID }, (err, user) => {
+            if (err) {
                 throw err;
             } else if (user) {
                 console.log(user);
@@ -124,14 +122,12 @@ exports.getProfile = (req, res) => {
 };
 
 exports.updateProfile = (req, res) => {
-
     console.log('Updating Profile...');
-    console.log(req.body);
     if (!req.session.isLoggedIn) {
         console.log("Please log in to update profile.");
     } else {
         Users.findByIdAndUpdate(req.session.ID, req.body, (err, user) => {
-            if(err) throw err;
+            if (err) throw err;
             res.status(200).send("Updated profile successfully!");
         });
     }

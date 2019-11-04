@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditDocument extends Component {
+class UpdateMenuItem extends Component {
 
   constructor(props) {
     super(props);
@@ -46,10 +46,11 @@ class EditDocument extends Component {
     };
 
     axios.post('http://localhost:3001/updateItem', data)
-      .then(json => {
-        this.props.history.push('/listDocument');
-      }).catch((error) => {
-        console.log(error);
+      .then(res => {
+        console.log(JSON.stringify(res));
+        this.props.history.push('/ownerhome/menu');
+      }).catch((err) => {
+        console.log(err);
       });
   }
 
@@ -89,4 +90,4 @@ class EditDocument extends Component {
   }
 }
 
-export default EditDocument;
+export default UpdateMenuItem;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
+import RemoveMenuItem from './RemoveMenuItem';
 import { Link } from 'react-router-dom';
 
-class ListDocument extends Component {
+class AppetizerMenu extends Component {
   constructor(props) {
     super(props);
     this.state = { items: '' };
@@ -21,7 +21,7 @@ class ListDocument extends Component {
   tabRow() {
     if (this.state.items instanceof Array) {
       return this.state.items.map(function (object, i) {
-        return <TableRow obj={object} key={i} />;
+        return <RemoveMenuItem obj={object} key={i} />;
       })
     }
   }
@@ -30,7 +30,7 @@ class ListDocument extends Component {
     return (
       <div className="container">
         <h3>Menu</h3>
-        <Link to={"/addDocument"} >Add New Item</Link>
+        <Link to={"/addMenuItem"} >Add New Item</Link>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -49,4 +49,4 @@ class ListDocument extends Component {
   }
 }
 
-export default ListDocument;
+export default AppetizerMenu;
