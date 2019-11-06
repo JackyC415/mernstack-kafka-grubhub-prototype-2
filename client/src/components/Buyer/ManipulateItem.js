@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-class RemoveCartItem extends Component {
+class ManipulateItem extends Component {
   constructor(props) {
     super(props);
   }
@@ -16,27 +17,28 @@ class RemoveCartItem extends Component {
         } else {
           this.props.history.push('/');
         }
-      }).catch((error) => {
-        console.log(error);
+      }).catch((err) => {
+        console.log(err);
       })
   }
 
   render() {
     return (
       <tr>
-        <td>{this.props.obj.item_name}</td>
-        <td>{this.props.obj.item_desc}</td>
-        <td>{this.props.obj.item_image}</td>
-        <td>{this.props.obj.item_quantity}</td>
-        <td>{this.props.obj.item_price}</td>
+        <td>{this.props.obj.order_name}</td>
+        <td>{this.props.obj.order_quantity}</td>
+        <td>{this.props.obj.order_price}</td>
+        <td>{this.props.obj.owner}</td>
+        <td>{this.props.obj.date}</td>
         <td>
           <form >
             <button type="button" onClick={this.removeCart} className="btn btn-danger">Cancel</button>
           </form>
         </td>
+        <td><Link to={"/messageOwner/" + this.props.obj.owner} className="btn btn-primary">Message</Link></td>
       </tr>
     );
   }
 }
 
-export default withRouter(RemoveCartItem);
+export default withRouter(ManipulateItem);

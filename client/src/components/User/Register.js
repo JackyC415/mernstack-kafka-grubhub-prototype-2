@@ -22,7 +22,6 @@ class Register extends Component {
             restaurantname: '',
             zipcode: '',
             cuisine: '',
-            phone: '',
             owner: false,
             errors: {}
         };
@@ -68,7 +67,7 @@ class Register extends Component {
             password: this.state.password,
             restaurantname: this.state.restaurantname,
             zipcode: this.state.zipcode,
-            owner: true
+            owner: this.state.owner
         }
 
         if (!this.state.owner) {
@@ -107,7 +106,7 @@ class Register extends Component {
                     <Form.Group controlId="formZipcode">
                         <Form.Label>Zipcode:</Form.Label>
                         <Form.Control 
-                            type="number" 
+                            type="text" 
                             name="zipcode" 
                             maxLength="5" 
                             placeholder="5 digits" 

@@ -10,8 +10,21 @@ class AddMenuItem extends Component {
       item_image: '',
       item_quantity: 0,
       item_price: 0,
-      item_section: 'Breakfast'
+      item_section: 'Breakfast',
+      item_cuisine: '',
+      restaurant_name: ''
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/getProfile')
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({ restaurant_name: res.data.restaurantname, item_cuisine: res.data.cuisine });
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
   }
 
   addItemToMenu = () => {
@@ -22,7 +35,9 @@ class AddMenuItem extends Component {
       item_image: this.state.item_image,
       item_quantity: this.state.item_quantity,
       item_price: this.state.item_price,
-      item_section: this.state.item_section
+      item_section: this.state.item_section,
+      item_cuisine: this.state.item_cuisine,
+      restaurant_name: this.state.restaurant_name
     };
 
     axios.post('http://localhost:3001/saveItem', data)
@@ -64,13 +79,13 @@ class AddMenuItem extends Component {
                 <input name="item_price" type="text" className="form-control" onChange={this.handleChange} value={this.state.item_price}></input>
               </div>
               <div className="form-group">
-              <label>Section: </label>
-               <select name="item_section" onChange={this.handleChange} value={this.state.item_section}>
+                <label>Section: </label>
+                <select name="item_section" onChange={this.handleChange} value={this.state.item_section}>
                   <option value="Breakfast">Breakfast</option>
                   <option value="Lunch">Lunch</option>
                   <option value="Appetizer">Appetizer</option>
-               </select>
-               </div>
+                </select>
+              </div>
               <button type="button" onClick={this.addItemToMenu} className="btn btn-primary">Add Item</button>
             </form>
           </div>

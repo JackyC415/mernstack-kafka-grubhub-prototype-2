@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RemoveCartItem from './RemoveCartItem';
+import OrderItem from './OrderItem';
 
 class AddToCart extends Component {
   constructor(props) {
@@ -9,18 +9,18 @@ class AddToCart extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/getOwnerMenu')
+    axios.get('http://localhost:3001/viewSearchItems')
       .then(res => {
         this.setState({ items: res.data });
-      }).catch((error) => {
-        console.log(error);
+      }).catch((err) => {
+        console.log(err);
       });
   }
 
   tabRow() {
     if (this.state.items instanceof Array) {
       return this.state.items.map(function (object, i) {
-        return <RemoveCartItem obj={object} key={i} />;
+        return <OrderItem obj={object} key={i} />;
       })
     }
   }
@@ -37,7 +37,7 @@ class AddToCart extends Component {
               <td>Image</td>
               <td>Quantity</td>
               <td>Price</td>
-              <td></td>
+              <td>Restaurant</td>
             </tr>
           </thead>
           <tbody> {this.tabRow()} </tbody>

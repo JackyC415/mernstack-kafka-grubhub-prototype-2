@@ -33,14 +33,13 @@ const UserSchema = new Schema({
   },
   phone: {
     type: String,
-    unique: true,
     required: true,
     default: "N/A"
   },
   zipcode: {
-    type: Number,
+    type: String,
     required: true,
-    default: 00000
+    default: "00000"
   },
   owner: {
     type: Boolean,

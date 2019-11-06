@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ManipulateItem from './ManipulateItem';
+import ReplyMessage from './ReplyMessage';
 
-class ViewCart extends Component {
+class Inbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orders: ''
+      messages: ''
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/viewCart')
+    axios.get('http://localhost:3001/viewMessages')
       .then(res => {
-        this.setState({ orders: res.data });
+        this.setState({ messages: res.data });
       }).catch((err) => {
         console.log(err);
       });
   }
 
   tabRow() {
-    if (this.state.orders instanceof Array) {
-      return this.state.orders.map(function (object, i) {
-        return <ManipulateItem obj={object} key={i} />;
+    if (this.state.messages instanceof Array) {
+      return this.state.messages.map(function (object, i) {
+        return <ReplyMessage obj={object} key={i} />;
       })
     }
   }
@@ -30,15 +30,13 @@ class ViewCart extends Component {
   render() {
     return (
       <div className="container">
-        <h3>Cart</h3>
+        <h3>Inbox</h3>
         <table className="table table-striped">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Owner</td>
-              <td>Order Date</td>
+              <td>Buyer</td>
+              <td>Message</td>
+              <td>Date</td>
             </tr>
           </thead>
           <tbody> {this.tabRow()} </tbody>
@@ -48,4 +46,4 @@ class ViewCart extends Component {
   }
 }
 
-export default ViewCart;
+export default Inbox;

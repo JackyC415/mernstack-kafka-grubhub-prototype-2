@@ -16,6 +16,14 @@ const MenuSchema = new Schema({
         type: String,
         default: ""
     },
+    restaurant_name: {
+        type: String,
+        default: ""
+    },
+    cuisine: {
+        type: String,
+        default: ""
+    },
     item_quantity: {
         type: Number,
         default: 0

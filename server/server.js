@@ -8,9 +8,18 @@ const bodyParser = require('body-parser');
 const User = require("./models/User");
 const PORT = process.env.PORT || 3001;
 
-//User authentication with passport
-app.use(passport.initialize());
-require("./config/passport")(passport);
+/*
+const corsPrefetch = require("cors-prefetch-middleware");
+const imagesUpload = require("images-upload-middleware");
+
+app.use('/static', express.static('./server/static'));
+app.use(corsPrefetch);
+ 
+app.post('/notmultiple', imagesUpload(
+    './server/static/files',
+    'http://localhost:3001/static/files'
+));
+*/
 
 //cross origin resources sharing
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -35,34 +44,48 @@ app.use(session({
   activeDuration: 5 * 60 * 1000
 }));
 
+//connect to mongoDB through mongoose schema model
 mongoose.connect('mongodb://localhost:27017/lab2', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-  .then(() => console.log("MongoDB successfully connected!"))
+  .then(() => console.log("MongoDB connected!"))
   .catch(err => console.log(err));
 mongoose.set('useFindAndModify', false);
 
-const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
-const { getBuyerOrders, addToCart, getBuyerCart } = require('./routes/buyer');
-const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem, getBreakfastMenu } = require('./routes/owner');
-const { searchItemByName, filterItemByName } = require('./routes/search');
+//Passport middleware
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
+//initialize routes path
+const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
+const { getRestaurants, orderItem, viewCart, viewSearchItems, filterByCuisine, messageOwner, viewReply } = require('./routes/buyer');
+const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem, getBreakfastMenu, getLunchMenu, getAppetizerMenu, viewMessages, replyBuyer } = require('./routes/owner');
+
+//GET api
 app.get('/getProfile', getProfile);
-app.get('/getBuyerOrders', getBuyerOrders);
-app.get('/getBuyerCart', getBuyerCart);
 app.get('/getOwnerMenu', getOwnerMenu);
 app.get('/getItemToEdit/:id', getItemToEdit);
 app.get('/getBreakfastMenu', getBreakfastMenu);
+app.get('/getLunchMenu', getLunchMenu);
+app.get('/getAppetizerMenu', getAppetizerMenu);
+app.get('/viewCart', viewCart);
+app.get('/viewSearchItems', viewSearchItems);
+app.get('/viewMessages', viewMessages);
+app.get('/viewReply', viewReply);
 
+//POST api
 app.post('/login', login);
 app.post('/register', register);
 app.post('/updateProfile', updateProfile);
 app.post('/logOut', logOut);
-app.post('/addToCart', addToCart);
 app.post('/updateItem', updateItem);
 app.post('/saveItem', saveItem);
-app.post('/searchItemByName', searchItemByName);
-app.post('/filterItemByName', filterItemByName);
+app.post('/orderItem/:id', orderItem);
+app.post('/getRestaurants', getRestaurants);
+app.post('/filterByCuisine', filterByCuisine);
+app.post('/messageOwner', messageOwner);
+app.post('/replyBuyer', replyBuyer);
 
+//DELETE api
 app.delete('/removeItem/:id', removeItem);
 
 module.exports = app;
-app.listen(PORT, () => console.log('Grubhub server listening on port:', PORT));
+app.listen(PORT, () => console.log('Server listening on port:', PORT));

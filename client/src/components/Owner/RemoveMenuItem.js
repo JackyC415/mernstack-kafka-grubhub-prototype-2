@@ -28,7 +28,7 @@ class RemoveMenuItem extends Component {
         <td>{this.props.obj.item_image}</td>
         <td>{this.props.obj.item_quantity}</td>
         <td>{this.props.obj.item_price}</td>
-        <td><Link to={"/getItemToEdit/" + this.props.obj._id} className="btn btn-primary">Edit</Link></td>
+        <td><Link to={"/getItemToEdit/" + this.props.obj._id} className="btn btn-primary">Update</Link></td>
         <td>
           <form >
             <button type="button" onClick={this.removeMenuItem} className="btn btn-danger">Delete</button>

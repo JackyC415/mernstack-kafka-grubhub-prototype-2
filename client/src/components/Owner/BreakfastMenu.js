@@ -13,8 +13,8 @@ class BreakfastMenu extends Component {
     axios.get('http://localhost:3001/getBreakfastMenu')
       .then(res => {
         this.setState({ items: res.data });
-      }).catch((error) => {
-        console.log(error);
+      }).catch((err) => {
+        console.log(err);
       });
   }
 

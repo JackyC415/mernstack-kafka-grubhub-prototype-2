@@ -24,7 +24,6 @@ class OwnerMenu extends Component {
     }
   }
   render() {
-      console.log(this.state.activeTab);
     return (
       <div>
         <Nav tabs>

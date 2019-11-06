@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const Users = require("../models/User");
 const jwt = require("jsonwebtoken");
+//const config = require('./config/setting');
 
 exports.register = (req, res) => {
     console.log('Registering...');
@@ -25,8 +26,9 @@ exports.register = (req, res) => {
             Users.findOne({ email: req.body.email }).then(user => {
                 if (user) {
                     console.log('Email already exists!');
-                    return res.status(400).json("Email already exists!");
+                    res.status(400).json("Email already exists!");
                 } else {
+                    console.log(req.body);
                     const newUser = new Users({
                         name: req.body.name,
                         email: req.body.email,
@@ -34,7 +36,6 @@ exports.register = (req, res) => {
                         restaurantname: req.body.restaurantname,
                         cuisine: req.body.cuisine,
                         zipcode: req.body.zipcode,
-                        phone: req.body.phone,
                         owner: req.body.owner
                     });
                     bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
@@ -44,6 +45,7 @@ exports.register = (req, res) => {
                             .then(() => res.json('Registered!'))
                             .catch(err => res.status(400).json('Error: ' + err))
                     });
+                    console.log(newUser);
                 }
             });
         }
@@ -88,12 +90,9 @@ exports.login = (req, res) => {
                     } else {
                         res.cookie('cookie', "owner", { maxAge: 900000, httpOnly: false, path: '/' });
                     }
-                    req.session.email = user.email;
                     req.session.ID = user.id;
                     req.session.isLoggedIn = true;
-                    res.writeHead(200, {
-                        'Content-Type': 'text/plain'
-                    })
+                    res.writeHead(200, { 'Content-Type': 'text/plain' })
                     res.end("Successful Login!");
                 } else {
                     return res.status(400).send('Incorrect password!');
@@ -136,5 +135,7 @@ exports.updateProfile = (req, res) => {
 exports.logOut = (req, res) => {
     console.log("Logging out...");
     req.session.isLoggedIn = false;
+    req.session.ID = null;
+    req.session.itemName = null;
     res.sendStatus(200);
 };

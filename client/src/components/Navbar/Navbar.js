@@ -39,20 +39,67 @@ class NavbarPage extends Component {
     }
     render() {
         let main = null;
-        if (cookie.load('cookie')) {
+        if (cookie.load('cookie') === 'owner') {
             main = (
                 <div>
                     <Navbar color="light" light expand="md">
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink tag={Link} to="/">Grubhub Prototype Lab2</NavLink>
-                            </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/ownerhome">Homepage</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/image">Image</NavLink>
+                                </NavItem>
                         </Nav>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     <NavLink tag={Link} to="/profile">Profile</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/ownerhome/menu">Menu</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/ownerhome/vieworder">View Order</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/inbox">Inbox</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/" onClick={this.handleLogout}>Logout</NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
+                </div>
+            );
+        } else if (cookie.load('cookie') === 'buyer') {
+            main = (
+                <div>
+                    <Navbar color="light" light expand="md">
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink tag={Link} to="/buyerhome">Homepage</NavLink>
+                            </NavItem>
+                        </Nav>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                <NavLink tag={Link} to="/search/pagination">Search</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/profile">Profile</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/addToCart">Order</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/viewCart">View Cart</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/dialog">Dialog</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} to="/" onClick={this.handleLogout}>Logout</NavLink>
@@ -68,7 +115,7 @@ class NavbarPage extends Component {
                     <Navbar color="light" light expand="md">
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink tag={Link} to="/">Grubhub Prototype Lab2 </NavLink>
+                                <NavLink tag={Link} to="/">Lab2 </NavLink>
                             </NavItem>
                         </Nav>
                         <div>
@@ -108,7 +155,7 @@ class NavbarPage extends Component {
         if (cookie.load('cookie') === 'owner') {
             redirectVar = <Redirect to="/ownerhome" />
         } else if (cookie.load('cookie') === 'buyer') {
-            redirectVar = <Redirect to="/buyerhome" />
+            redirectVar = <Redirect to="/search/pagination" />
         }
         return (
             <div>
