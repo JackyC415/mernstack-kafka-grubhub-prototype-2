@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require('body-parser');
 const User = require("./models/User");
-const kafka = require('./kafka/client')
+const kafka = require('./kafka/client');
+const path = require("path");
 const PORT = process.env.PORT || 3001;
 
 //cross origin resources sharing
@@ -78,6 +79,11 @@ app.post('/replyBuyer', replyBuyer);
 app.delete('/removeItem/:id', removeItem);
 app.delete('/cancelOrder/:id', cancelOrder);
 app.delete('/deliverOrder/:id', deliverOrder);
+
+app.use(express.static("client/build"));
+app.get("*", (req, res) => {
+res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 module.exports = app;
 app.listen(PORT, () => console.log('Server listening on port:', PORT));
