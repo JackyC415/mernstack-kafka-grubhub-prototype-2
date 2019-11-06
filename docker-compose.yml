@@ -1,0 +1,20 @@
+version: '3.0' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+ react: # name of the first service
+  build: client # specify the directory of the Dockerfile
+  ports:
+  - "3000:3000" # specify port mapping
+ 
+ node: # name of the second service
+  build: server # specify the directory of the Dockerfile
+  ports:
+  - "3001:3001" #specify ports mapping
+  links:
+  - mongodb # link this service to the database service
+ 
+ mongodb: # name of the third service
+  image: mongo # specify image to build container from
+  ports:
+  - "27017:27017" # specify port forwarding
