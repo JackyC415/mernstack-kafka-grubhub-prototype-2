@@ -99,7 +99,10 @@ class NavbarPage extends Component {
                                     <NavLink tag={Link} to="/viewCart">View Cart</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} to="/dialog">Dialog</NavLink>
+                                    <NavLink tag={Link} to="/viewPastOrder">Past Orders</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/dialog">Inbox</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} to="/" onClick={this.handleLogout}>Logout</NavLink>

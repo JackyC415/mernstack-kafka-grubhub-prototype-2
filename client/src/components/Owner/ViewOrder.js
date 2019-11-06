@@ -9,7 +9,7 @@ class ViewOrder extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/getOwnerMenu')
+        axios.get('http://localhost:3001/viewOrders')
             .then(res => {
                 console.log(res.data);
                 this.setState({ items: res.data });
@@ -34,10 +34,10 @@ class ViewOrder extends Component {
                 <thead>
                   <tr>
                     <td>Name</td>
-                    <td>Description</td>
-                    <td>Image</td>
                     <td>Quantity</td>
                     <td>Price</td>
+                    <td>Buyer</td>
+                    <td>Date</td>
                     <td></td>
                   </tr>
                 </thead>

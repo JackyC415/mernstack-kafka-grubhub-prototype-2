@@ -1,5 +1,6 @@
 const Orders = require("../models/Order");
 const Inbox = require("../models/Inbox");
+const PastOrder = require('../models/PastOrder');
 
 exports.getRestaurants = (req, res) => {
     console.log('INSIDE GET RESTAURANTS...');
@@ -65,6 +66,19 @@ exports.viewCart = (req, res) => {
         }
     });
 
+};
+
+exports.viewPastOrders = (req, res) => {
+    console.log("INSIDE VIEW PAST ORDERS");
+    PastOrder.find({ buyer: req.session.ID }, (err, items) => {
+        if (err) {
+            throw err;
+        } else if (items) {
+            res.status(200).send(items);
+        } else {
+            return res.status(404).send("No past orders!");
+        }
+    });
 };
 
 exports.viewSearchItems = (req, res) => {

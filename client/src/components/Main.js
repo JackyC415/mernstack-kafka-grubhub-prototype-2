@@ -20,6 +20,7 @@ import ViewCart from './Buyer/ViewCart';
 import AddToCart from './Buyer/AddToCart';
 import Message from './Buyer/Message';
 import Dialog from './Buyer/Dialog';
+import ViewPastOrders from './Buyer/ViewPastOrders';
 
 //Create a Main Component
 class Main extends Component {
@@ -44,6 +45,7 @@ class Main extends Component {
                 <Route path="/replyMessage/:id" component={Reply} />
                 <Route path="/inbox" component={Inbox} />
                 <Route path="/dialog" component={Dialog} />
+                <Route path="/viewPastOrder" component={ViewPastOrders} />
             </div>
         )
     }

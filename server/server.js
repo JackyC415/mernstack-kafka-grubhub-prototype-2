@@ -9,19 +9,6 @@ const User = require("./models/User");
 const kafka = require('./kafka/client')
 const PORT = process.env.PORT || 3001;
 
-/*
-const corsPrefetch = require("cors-prefetch-middleware");
-const imagesUpload = require("images-upload-middleware");
-
-app.use('/static', express.static('./server/static'));
-app.use(corsPrefetch);
- 
-app.post('/notmultiple', imagesUpload(
-    './server/static/files',
-    'http://localhost:3001/static/files'
-));
-*/
-
 //cross origin resources sharing
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(bodyParser.json());
@@ -57,8 +44,8 @@ require("./config/passport")(passport);
 
 //initialize routes path
 const { login, register, getProfile, updateProfile, logOut } = require('./routes/user');
-const { getRestaurants, orderItem, viewCart, viewSearchItems, filterByCuisine, messageOwner, viewReply } = require('./routes/buyer');
-const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem, getBreakfastMenu, getLunchMenu, getAppetizerMenu, viewMessages, replyBuyer } = require('./routes/owner');
+const { getRestaurants, orderItem, viewCart, viewSearchItems, viewPastOrders, filterByCuisine, messageOwner, viewReply } = require('./routes/buyer');
+const { getItemToEdit, getOwnerMenu, updateItem, removeItem, saveItem, viewOrders, cancelOrder, deliverOrder, getBreakfastMenu, getLunchMenu, getAppetizerMenu, viewMessages, replyBuyer } = require('./routes/owner');
 
 //GET api
 app.get('/getProfile', getProfile);
@@ -69,6 +56,8 @@ app.get('/getLunchMenu', getLunchMenu);
 app.get('/getAppetizerMenu', getAppetizerMenu);
 app.get('/viewCart', viewCart);
 app.get('/viewSearchItems', viewSearchItems);
+app.get('/viewOrders', viewOrders);
+app.get('/viewPastOrders', viewPastOrders);
 app.get('/viewMessages', viewMessages);
 app.get('/viewReply', viewReply);
 
@@ -87,6 +76,8 @@ app.post('/replyBuyer', replyBuyer);
 
 //DELETE api
 app.delete('/removeItem/:id', removeItem);
+app.delete('/cancelOrder/:id', cancelOrder);
+app.delete('/deliverOrder/:id', deliverOrder);
 
 module.exports = app;
 app.listen(PORT, () => console.log('Server listening on port:', PORT));
