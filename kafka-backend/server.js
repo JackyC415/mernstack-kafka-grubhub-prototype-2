@@ -2,8 +2,8 @@ var connection =  new require('./kafka/Connection');
 //topics files
 const mongoose = require("mongoose");
 
-var Login = require('./services/Login.js')
-var UserSignUp = require('./services/Register')
+//var Login = require('./services/Login.js')
+var Register = require('./services/Register')
 
 function handleTopicRequest(topic_name,fname){
     //var topic_name = 'root_topic';
@@ -37,5 +37,5 @@ function handleTopicRequest(topic_name,fname){
 // Add your TOPICs here
 //first argument is topic name
 //second argument is a function that will handle this topic request
-handleTopicRequest("Login", Login)
-handleTopicRequest("Register", Register)
+//handleTopicRequest("Login", Login)
+handleTopicRequest("register", Register)

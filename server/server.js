@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require('body-parser');
 const User = require("./models/User");
+const kafka = require('./kafka/client')
 const PORT = process.env.PORT || 3001;
 
 /*
