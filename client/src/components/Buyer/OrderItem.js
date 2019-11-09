@@ -11,7 +11,7 @@ class OrderItem extends Component {
   }
 
   orderItem = () => {
-    axios.post('http://localhost:3001/orderItem/' + this.props.obj._id, { quantity: this.state.item_quantity })
+    axios.post('/orderItem/' + this.props.obj._id, { quantity: this.state.item_quantity })
       .then(res => {
         (res.status === 200) ? alert("Added item to Cart!") : alert("Out of stock!");
       }).catch((err) => {
@@ -28,7 +28,7 @@ class OrderItem extends Component {
       <tr>
         <td>{this.props.obj.item_name}</td>
         <td>{this.props.obj.item_desc}</td>
-        <td>{this.props.obj.item_image}</td>
+        <td><img src="/images/pizza.jpg" alt=""/></td>
         <td>
           <input
             name="item_quantity"

@@ -8,7 +8,7 @@ class CancelOrder extends Component {
   }
 
   cancelOrder = () => {
-    axios.delete('http://localhost:3001/cancelOrder/' + this.props.obj._id)
+    axios.delete('/cancelOrder/' + this.props.obj._id)
       .then(res => {
         if (res.status === 200) {
           alert("Cancelled order!");
@@ -20,7 +20,7 @@ class CancelOrder extends Component {
   }
 
   deliverOrder = () => {
-    axios.delete('http://localhost:3001/deliverOrder/' + this.props.obj._id)
+    axios.delete('/deliverOrder/' + this.props.obj._id)
       .then(res => {
         if (res.status === 200) {
           alert("Delivered order!");

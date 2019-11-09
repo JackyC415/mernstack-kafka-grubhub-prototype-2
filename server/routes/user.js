@@ -1,7 +1,7 @@
 //References: https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
 const Joi = require('@hapi/joi');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+//const bcrypt = require('bcrypt');
+//const saltRounds = 10;
 const Users = require("../models/User");
 const jwt = require("jsonwebtoken");
 //const config = require('./config/setting');
@@ -38,13 +38,14 @@ exports.register = (req, res) => {
                         zipcode: req.body.zipcode,
                         owner: req.body.owner
                     });
-                    bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
-                        if (err) throw err;
+
+                    //bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
+                        //if (err) throw err;
                         newUser.password = hash;
                         newUser.save()
                             .then(() => res.json('Registered!'))
                             .catch(err => res.status(400).json('Error: ' + err))
-                    });
+                    //});
                     console.log(newUser);
                 }
             });
@@ -70,8 +71,8 @@ exports.login = (req, res) => {
     } else {
         Users.findOne({ email: req.body.email }).then(user => {
             if (!user) return res.status(404).json('Email does not exist!');
-            bcrypt.compare(req.body.password, user.password).then(isMatch => {
-                if (isMatch) {
+            //bcrypt.compare(req.body.password, user.password).then(isMatch => {
+                //if (isMatch) {
                     jwt.sign(
                         { id: user.id }, 'secret', { expiresIn: 3600 },
                         (err, token) => {
@@ -94,10 +95,10 @@ exports.login = (req, res) => {
                     req.session.isLoggedIn = true;
                     res.writeHead(200, { 'Content-Type': 'text/plain' })
                     res.end("Successful Login!");
-                } else {
-                    return res.status(400).send('Incorrect password!');
-                }
-            });
+                //} else {
+                  //  return res.status(400).send('Incorrect password!');
+                //}
+            //});
         });
     }
 };

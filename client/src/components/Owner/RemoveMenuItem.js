@@ -9,7 +9,7 @@ class RemoveMenuItem extends Component {
   }
 
   removeMenuItem = () => {
-    axios.delete('http://localhost:3001/removeItem/' + this.props.obj._id)
+    axios.delete('/removeItem/' + this.props.obj._id)
       .then(res => {
         if (res.status === 200) {
           alert("Removed menu item!");
@@ -25,7 +25,7 @@ class RemoveMenuItem extends Component {
       <tr>
         <td>{this.props.obj.item_name}</td>
         <td>{this.props.obj.item_desc}</td>
-        <td>{this.props.obj.item_image}</td>
+        <td><img src="/images/pizza.jpg" alt=""/></td>
         <td>{this.props.obj.item_quantity}</td>
         <td>{this.props.obj.item_price}</td>
         <td><Link to={"/getItemToEdit/" + this.props.obj._id} className="btn btn-primary">Update</Link></td>

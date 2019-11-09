@@ -10,7 +10,7 @@ class LunchMenu extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/getLunchMenu')
+    axios.get('/getLunchMenu')
       .then(res => {
         this.setState({ items: res.data });
       }).catch((err) => {

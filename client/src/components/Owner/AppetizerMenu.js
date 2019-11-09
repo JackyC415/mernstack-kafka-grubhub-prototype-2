@@ -10,7 +10,7 @@ class AppetizerMenu extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/getAppetizerMenu')
+    axios.get('/getAppetizerMenu')
       .then(res => {
         this.setState({ items: res.data });
       }).catch((err) => {

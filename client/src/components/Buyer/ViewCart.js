@@ -11,7 +11,7 @@ class ViewCart extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/viewCart')
+    axios.get('/viewCart')
       .then(res => {
         this.setState({ orders: res.data });
       }).catch((err) => {

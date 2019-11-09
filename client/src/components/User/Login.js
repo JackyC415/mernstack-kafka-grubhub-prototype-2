@@ -39,7 +39,7 @@ class Login extends Component {
 
     sendRestAPI = (data) => {
         axios.defaults.withCredentials = true;
-        axios.post('http://localhost:3001/login', data)
+        axios.post('/login', data)
             .then(res => {
                 console.log("Status Code : ", res.status);
                 if (res.status === 200) {

@@ -11,7 +11,7 @@ class Dialog extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/viewReply')
+        axios.get('/viewReply')
             .then(res => {
                 this.setState({ messages: res.data });
             }).catch((err) => {

@@ -16,7 +16,7 @@ const Search = () => {
 
   const getRestaurants = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:3001/getRestaurants', { item: item });
+    const res = await axios.post('/getRestaurants', { item: item });
     setPosts(res.data);
     setDisplay(true);
   };
@@ -24,7 +24,7 @@ const Search = () => {
   const filterByCuisine = async (e) => {
     console.log(cuisine);
     e.preventDefault();
-    const res = await axios.post('http://localhost:3001/filterByCuisine', { cuisine: cuisine });
+    const res = await axios.post('/filterByCuisine', { cuisine: cuisine });
     setPosts(res.data);
     setDisplay(true);
   };
@@ -52,6 +52,7 @@ const Search = () => {
   }
   return (
     <div className='container mt-5'>
+      <h1>Buyer Homepage</h1>
       <MDBCol md="6">
         <form className="form-inline mt-4 mb-4" onSubmit={getRestaurants}>
           <MDBIcon icon="search" />

@@ -11,7 +11,7 @@ class Inbox extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/viewMessages')
+    axios.get('/viewMessages')
       .then(res => {
         this.setState({ messages: res.data });
       }).catch((err) => {

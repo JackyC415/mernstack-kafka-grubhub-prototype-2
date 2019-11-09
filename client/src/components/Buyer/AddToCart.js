@@ -9,7 +9,7 @@ class AddToCart extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/viewSearchItems')
+    axios.get('/viewSearchItems')
       .then(res => {
         this.setState({ items: res.data });
       }).catch((err) => {

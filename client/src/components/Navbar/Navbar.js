@@ -26,7 +26,7 @@ class NavbarPage extends Component {
     }
 
     handleLogout = () => {
-        axios.post('http://localhost:3001/logOut')
+        axios.post('/logOut')
             .then(res => {
                 if (res) console.log("Logged Out!");
             });
@@ -46,9 +46,6 @@ class NavbarPage extends Component {
                         <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     <NavLink tag={Link} to="/ownerhome">Homepage</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} to="/image">Image</NavLink>
                                 </NavItem>
                         </Nav>
                         <NavbarToggler onClick={this.toggle} />

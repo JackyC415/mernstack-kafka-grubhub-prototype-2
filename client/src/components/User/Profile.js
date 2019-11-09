@@ -20,7 +20,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/getProfile')
+        axios.get('/getProfile')
             .then(res => {
                 if (res.status === 200) {
                     this.setState({ name: res.data.name });
@@ -40,7 +40,7 @@ class Profile extends Component {
     }
 
     updateProfile = (data) => {
-        axios.post('http://localhost:3001/updateProfile', data)
+        axios.post('/updateProfile', data)
             .then(res => {
                 this.setState({ output: res.data })
             });

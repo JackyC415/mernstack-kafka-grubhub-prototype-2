@@ -14,7 +14,6 @@ import ViewOrder from './Owner/ViewOrder';
 import Inbox from './Owner/Inbox';
 import Reply from './Owner/Reply';
 
-import BuyerHome from './Buyer/Homepage';
 import Search from './Buyer/Search';
 import ViewCart from './Buyer/ViewCart';
 import AddToCart from './Buyer/AddToCart';
@@ -32,7 +31,6 @@ class Main extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/buyerhome" component={BuyerHome} />
                 <Route path="/viewCart" component={ViewCart} />
                 <Route path="/addToCart" component={AddToCart} />
                 <Route path="/getItemToEdit/:id" component={UpdateMenuItem} />

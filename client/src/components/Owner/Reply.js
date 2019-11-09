@@ -22,7 +22,7 @@ class Reply extends Component {
         message: this.state.reply
     }
 
-    axios.post('http://localhost:3001/replyBuyer', data)
+    axios.post('/replyBuyer', data)
       .then(res => {
         alert('Replied!');
         console.log(JSON.stringify(res));

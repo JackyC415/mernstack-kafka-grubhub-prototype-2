@@ -46,7 +46,7 @@ class Register extends Component {
 
     //send registration data to server for processing
     sendRestAPI = (data) => {
-        axios.post('http://localhost:3001/register', data)
+        axios.post('/register', data)
             .then(res => {
                 console.log(res.data);
             });

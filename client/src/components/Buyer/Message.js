@@ -22,7 +22,7 @@ class Message extends Component {
       message: this.state.message
     }
 
-    axios.post('http://localhost:3001/messageOwner', data)
+    axios.post('/messageOwner', data)
       .then(res => {
         alert('Message Sent!');
         console.log(JSON.stringify(res));

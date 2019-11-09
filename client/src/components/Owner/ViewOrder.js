@@ -9,7 +9,7 @@ class ViewOrder extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/viewOrders')
+        axios.get('/viewOrders')
             .then(res => {
                 console.log(res.data);
                 this.setState({ items: res.data });

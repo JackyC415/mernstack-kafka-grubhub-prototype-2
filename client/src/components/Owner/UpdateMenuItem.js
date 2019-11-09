@@ -16,7 +16,7 @@ class UpdateMenuItem extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/getItemToEdit/' + this.props.match.params.id)
+    axios.get('/getItemToEdit/' + this.props.match.params.id)
       .then(res => {
         this.setState({
           item_name: res.data.item_name,
@@ -45,7 +45,7 @@ class UpdateMenuItem extends Component {
       id: this.props.match.params.id
     };
 
-    axios.post('http://localhost:3001/updateItem', data)
+    axios.post('/updateItem', data)
       .then(res => {
         console.log(JSON.stringify(res));
         this.props.history.push('/ownerhome/menu');
