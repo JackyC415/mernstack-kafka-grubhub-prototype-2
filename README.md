@@ -2,4 +2,4 @@
 
 Instruction to clone, install & launch app:
 
-git clone https://github.com/JackyC415/Lab2-009941451.git lab2 && cd lab2 && cd client && npm i && cd ../server && npm i && npm run dev
+git clone https://github.com/JackyC415/mernstack-kafka-grubhub-prototype.git && cd mernstack-kafka-grubhub-prototype && cd client && npm i && cd ../server && npm i && npm run dev
